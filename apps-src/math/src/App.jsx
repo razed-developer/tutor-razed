@@ -9,7 +9,7 @@ export default function App(){
  const [active,setActive]=useState('transformations'); const [menu,setMenu]=useState(false);
  const topic=topics.find(t=>t.id===active);
  return <div className="app-shell">
-  <header><div className="brand"><div className="brand-mark">ƒ</div><div><strong>Pre-Calculus Lab</strong><span>Functions, relations & transformations</span></div></div><div className="header-actions"><a className="portal-link" href="/">← Tutor Portal</a><button className="menu-btn" onClick={()=>setMenu(!menu)} aria-label="Toggle course menu" aria-expanded={menu}>{menu?'×':'☰'}</button></div></header>
+  <header><div className="brand"><div className="brand-mark">ƒ</div><div><strong>Pre-Calculus Lab</strong><span>Functions, relations & transformations</span></div></div><div className="header-actions"><a className="portal-link" href="/">← Tutor Razed</a><button className="menu-btn" onClick={()=>setMenu(!menu)} aria-label="Toggle course menu" aria-expanded={menu}>{menu?'×':'☰'}</button></div></header>
   <div className="layout"><aside className={menu?'open':''}><p className="nav-label">Course map</p>{topics.map(t=><button key={t.id} className={active===t.id?'nav-active':''} onClick={()=>{setActive(t.id);setMenu(false)}}><span>{t.title}</span><small>{t.blurb}</small></button>)}<div className="aside-note">✎ <span>Use the whiteboard in any lesson to sketch, annotate, or solve.</span></div></aside>
   <main>
     <section className="hero"><span className="eyebrow">Grade 12 Pre-Calculus</span><h1>{topic.title}</h1><p>{topic.blurb}</p><div className="hero-chips"><span>▤ Learn</span><span>◉ Explore</span><span>ƒ Practice</span><span>▧ Reflect</span></div></section>

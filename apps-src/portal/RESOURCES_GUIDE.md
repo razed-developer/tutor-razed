@@ -41,3 +41,17 @@ npm run resources:sync
 npm run build
 npm run preview:site
 ```
+
+## Consistent Resource Image Prompt
+
+Use a 16:9 landscape image (recommended: 1600 x 900 px). Replace the bracketed details but keep the rest of the prompt unchanged:
+
+> Create a warm, handcrafted storybook-gouache illustration for the Tutor Razed learning portal. Show [SUBJECT OR ACTIVITY] through [ONE CLEAR CENTRAL SUBJECT], set in a recognizable Pacific Northwest coastal environment with evergreen forest, rocky shoreline, distant blue mountains, soft sea mist, ferns, cedar, and calm ocean details where appropriate. Use simplified friendly shapes, softly textured brushwork, subtle paper grain, crisp readable silhouettes, and carefully layered foreground, middle ground, and background. Palette: deep evergreen, spruce, dark teal, sea blue, misty blue-grey, warm cream, muted cedar brown, with one restrained coral or golden accent. Lighting is gentle natural daylight with a welcoming, curious, adventurous mood. Compose as a clean educational card thumbnail: one obvious focal point, low visual clutter, important details inside the centre 70 percent, and enough tonal separation to remain readable at small size. Match a cohesive modern Pacific Northwest children’s field-guide aesthetic. [AGE DIRECTION]. No words, letters, numbers, captions, logos, borders, interface elements, photorealism, glossy 3D rendering, neon colours, anime styling, or crowded composition.
+
+Choose one age direction:
+
+- **K–4:** Extra friendly and playful; rounded forms, expressive animal guide or child-safe object, brighter sea colours, gentle whimsy, no danger.
+- **5–8:** Adventurous and exploratory; richer environmental detail, active discovery, balanced playfulness and realism.
+- **9–12:** Mature illustrated field-guide tone; restrained expressions, more natural proportions, sophisticated composition, quieter colours, no childish mascots.
+
+For a coherent set, reuse the same age direction, palette, aspect ratio, lighting, and rendering language for every image. Change only the central subject, activity, and a few supporting environmental details.

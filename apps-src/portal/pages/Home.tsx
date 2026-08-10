@@ -26,7 +26,6 @@ const Home: React.FC = () => {
     </section>
 
     <main className="content-shell">
-      <section className="welcome-panel"><div><p className="eyebrow">Your current · {AGE_LABELS[ageBand]}</p><h2>{ageBand === "k4" ? "Ready, trailblazer?" : ageBand === "5-8" ? "What will you find today?" : "Your next idea starts here."}</h2></div><p>Everything shown is selected for this grade range. Change the current whenever you need a different challenge.</p></section>
       <section className="section-block"><div className="section-heading"><div><p className="eyebrow">Hand-picked</p><h2>Featured for you</h2></div><a href="/resources">See the whole collection →</a></div><div className="featured-grid">{featured.map((r) => <ResourceCard key={r.id} resource={r}/>)}</div></section>
       <section className="section-block"><div className="section-heading"><div><p className="eyebrow">Choose a route</p><h2>Explore by subject</h2></div></div><div className="subject-grid">
         <a href="/resources?subject=Math"><b>△</b><span><strong>Math</strong><small>Patterns, puzzles & graphs</small></span></a>
@@ -35,7 +34,7 @@ const Home: React.FC = () => {
         <a href="/resources"><b>✦</b><span><strong>Games & Tools</strong><small>Learn by doing</small></span></a>
       </div></section>
     </main>
-    <footer><span>Tutor Portal</span><p>Learning resources from the edge of the Pacific.</p><a href="/admin">Admin</a></footer>
+    <footer><span>Tutor Razed</span><p>Learning resources from the edge of the Pacific.</p><a href="/admin">Admin</a></footer>
   </div>;
 };
 export default Home;

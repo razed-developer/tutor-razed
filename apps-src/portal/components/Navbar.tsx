@@ -5,7 +5,7 @@ const Navbar: React.FC = () => {
   const [open, setOpen] = useState(false);
   const { ageBand, setAgeBand } = useAudience();
   return <header className="site-header">
-    <a className="brand" href="/" aria-label="Tutor Portal home"><span className="orca">◒</span><span>Tutor Portal</span></a>
+    <a className="brand" href="/" aria-label="Tutor Razed home"><span className="orca">◒</span><span>Tutor Razed</span></a>
     <button className="menu-button" onClick={() => setOpen(!open)} aria-label="Toggle menu">☰</button>
     <nav className={open ? "site-nav open" : "site-nav"}>
       <a href="/">Home</a><a href="/resources">Explore</a><a href="/math/">Math Lab</a>
