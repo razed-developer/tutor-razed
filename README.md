@@ -191,6 +191,10 @@ Cloudflare Pages settings:
 
 The committed `wrangler.toml` also declares `site` as the Pages build output directory.
 
+### Admin database
+
+The repository includes a D1 schema and Pages Functions API for the protected admin system. Cloudflare account setup is documented in [`docs/CLOUDFLARE_ADMIN_SETUP.md`](docs/CLOUDFLARE_ADMIN_SETUP.md). The public portal continues using `resources.portal.json` until D1 is configured and seeded.
+
 To connect the repository:
 
 1. In Cloudflare, open **Workers & Pages**.

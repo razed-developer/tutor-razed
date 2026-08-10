@@ -12,6 +12,8 @@
                     "build":  "npm run assemble",
                     "dev":  "node scripts/apps-runner.mjs dev",
                     "preview:site":  "npx serve site -l 4173",
-                    "resources:sync":  "node scripts/sync-portal-resources.mjs"
+                    "resources:sync":  "node scripts/sync-portal-resources.mjs",
+                    "db:migrate:local": "npx wrangler d1 migrations apply tutor-portal --local",
+                    "db:migrate:remote": "npx wrangler d1 migrations apply tutor-portal --remote"
                 }
 }

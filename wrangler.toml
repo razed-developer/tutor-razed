@@ -1,2 +1,5 @@
 name = "tutor-razed"
 pages_build_output_dir = "site"
+
+# Add the D1 binding after creating the database in Cloudflare. See
+# docs/CLOUDFLARE_ADMIN_SETUP.md for the exact block and dashboard steps.
