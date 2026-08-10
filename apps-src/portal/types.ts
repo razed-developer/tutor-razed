@@ -8,7 +8,11 @@ export interface Resource {
   type: ResourceType; thumbnail: string; downloadUrl: string; rating: number; tags: string[];
   ageBands: AgeBand[]; studentIds: string[]; groupIds: string[];
   featured: boolean; status: ResourceStatus;
+  sortOrder?: number;
 }
+
+export interface Student { id: string; displayName: string; active: boolean; }
+export interface StudentGroup { id: string; name: string; active: boolean; studentIds: string[]; }
 
 export interface ResourceInput {
   id?: string; title: string; description: string; subject: string; date?: string;

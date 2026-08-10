@@ -1,6 +1,6 @@
 # Cloudflare admin setup
 
-The repository contains the D1 schema and Pages Functions API. The public portal still uses the checked-in catalogue until D1 has been created, bound, migrated, and seeded.
+The repository contains the D1 schema, existing catalogue seed, Pages Functions API, and working admin interface. The public portal uses D1 when it is available and safely falls back to the checked-in catalogue during setup or an outage.
 
 ## 1. Create D1
 
@@ -45,7 +45,7 @@ npx wrangler login
 npm run db:migrate:remote
 ```
 
-Do not switch the public catalogue to D1 until this command succeeds and the existing resources have been imported.
+This applies both migrations: the schema and the existing resource catalogue.
 
 ## 5. Protect both admin paths with Access
 
@@ -66,9 +66,9 @@ After redeploying, sign in through Access and check:
 
 1. `/api/admin/resources` returns JSON when signed in.
 2. The same URL returns `403` without an Access session.
-3. `/api/resources` returns an empty `resources` array before content is imported.
-4. The existing public gallery still displays its checked-in catalogue.
+3. `/api/resources` returns the seeded resource catalogue.
+4. Creating a draft in `/admin` does not show it publicly; publishing it does.
 
 The anonymous public API deliberately excludes resources assigned to specific students or groups. Those assignments will become visible only through a later authenticated student endpoint.
 
-The next release will import `resources.portal.json`, connect the admin interface to these endpoints, and switch public reads to D1 with a safe fallback.
+The admin interface can now create, edit, publish, feature, order and archive resources, and assign them to age bands, students and groups.
