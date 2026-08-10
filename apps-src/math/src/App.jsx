@@ -17,7 +17,7 @@ export default function App(){
     {(active==='transformations'||active==='parents')&&<GraphExplorer/>}
     {active==='inverses'&&<InverseTool/>}
     {active==='composition'&&<CompositionTool/>}
-    {active==='operations'&&<section className="tool-card"><div className="tool-heading"><div><span className="eyebrow">Guided practice</span><h2>Operations on Functions</h2></div></div><div className="operation-cards">{['(f + g)(x)','(f − g)(x)','(fg)(x)','(f/g)(x)'].map((s,i)=><article key={s}><h3>{s}</h3><p>{['Add outputs','Subtract outputs','Multiply outputs','Divide outputs; exclude zeros of g'][i]}</p><div className="mini-task">Let f(x)=x² and g(x)=x−2. Find {s}.</div></article>)}</div></section>}
+    {active==='operations'&&<section className="tool-card"><div className="tool-heading"><div><span className="eyebrow">Guided practice</span><h2>Operations on Functions</h2></div><a className="launch-lab" href="/math/functions">Open full lab →</a></div><div className="operation-cards">{['(f + g)(x)','(f − g)(x)','(fg)(x)','(f/g)(x)'].map((s,i)=><article key={s}><h3>{s}</h3><p>{['Add outputs','Subtract outputs','Multiply outputs','Divide outputs; exclude zeros of g'][i]}</p><div className="mini-task">Let f(x)=x² and g(x)=x−2. Find {s}.</div></article>)}</div></section>}
     <Whiteboard/>
   </main></div>
   <footer>Built for exploration, explanation, and visible mathematical thinking.</footer>
