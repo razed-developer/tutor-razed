@@ -71,7 +71,7 @@
     "rating": 4.6,
     "tags": ["Writing","Hockey","Creativity"]
   },
-    {
+  {
     "id": "7",
     "title": "Graduate Together",
     "description": "Amber wants to help you all graduate. Learn skills and earn credits on your way.",
@@ -82,5 +82,17 @@
     "path": "/graduate-together/",
     "rating": 4.6,
     "tags": ["Lifeskills","Game","Symbols"]
+  },
+  {
+    "id": "8",
+    "title": "Pre-Calculus Lab",
+    "description": "Explore parent functions, transformations, inverses, compositions, and operations with interactive graphs and a digital whiteboard.",
+    "subject": "Math",
+    "date": "2026-08-09",
+    "type": "Website",
+    "thumbnail": "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&q=80&w=600",
+    "path": "/math/",
+    "rating": 5.0,
+    "tags": ["Math", "Pre-Calculus", "Functions", "Graphs"]
   }
 ]

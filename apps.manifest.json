@@ -15,11 +15,15 @@
       "path": "apps-src/story-symphony",
       "mount": "/story-symphony/"
     },
-        {
+    {
       "name": "graduate-together",
       "path": "apps-src/graduate-together",
       "mount": "/graduate-together/"
+    },
+    {
+      "name": "math",
+      "path": "apps-src/math",
+      "mount": "/math/"
     }
-
   ]
 }

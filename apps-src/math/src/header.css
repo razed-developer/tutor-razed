@@ -1,0 +1,26 @@
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.portal-link {
+  color: #d1fae5;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+
+.portal-link:hover,
+.portal-link:focus-visible {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+@media (max-width: 600px) {
+  .portal-link {
+    display: none;
+  }
+}
