@@ -1,5 +1,7 @@
 name = "tutor-razed"
 pages_build_output_dir = "site"
 
-# Add the D1 binding after creating the database in Cloudflare. See
-# docs/CLOUDFLARE_ADMIN_SETUP.md for the exact block and dashboard steps.
+[[d1_databases]]
+binding = "DB"
+database_name = "tutor-portal"
+database_id = "c81817b9-4d6b-46a6-9b9e-a6d5db95d51d"
