@@ -1,0 +1,25 @@
+{
+  "apps": [
+    {
+      "name": "portal",
+      "path": "apps-src/portal",
+      "mount": "/"
+    },
+    {
+      "name": "headline-to-story",
+      "path": "apps-src/headline-to-story",
+      "mount": "/headline-to-story/"
+    },
+     {
+      "name": "story-symphony",
+      "path": "apps-src/story-symphony",
+      "mount": "/story-symphony/"
+    },
+        {
+      "name": "graduate-together",
+      "path": "apps-src/graduate-together",
+      "mount": "/graduate-together/"
+    }
+
+  ]
+}

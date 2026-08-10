@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rabbit Integer Game</title>
+<style>
+  html, body { height: 100%; margin: 0; padding: 0; }
+
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: linear-gradient(to bottom, #3cb371, #1e90ff);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    color: #fff;
+  }
+
+  .container {
+    margin-top: 50px;
+    background: rgba(0,0,0,0.3);
+    padding: 20px;
+    border-radius: 15px;
+    width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    position: relative;
+  }
+
+  h1 { margin-bottom: 15px; }
+  #problem { font-size: 28px; margin: 20px 0; }
+  #feedback { margin-top: 15px; font-size: 20px; font-weight: bold; }
+  #scoreboard { margin-top: 15px; font-size: 22px; }
+
+  #numberline-container { position: relative; margin-top: 40px; }
+  #numberline {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    border-top: 3px solid white;
+    padding: 20px 0;
+    position: relative;
+  }
+  .tick {
+    width: 30px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    transition: color 0.3s, transform 0.3s;
+  }
+
+  .hole {
+    position: absolute;
+    width: 20px;
+    height: 10px;
+    background: #222;
+    border-radius: 50%;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%) scaleY(0.5);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  #rabbit {
+    font-size: 32px;
+    position: absolute;
+    top: -35px;
+    left: 0;
+    transform: scaleX(1);
+    transition: all 0.2s ease;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Adding & Subtracting Integers</h1>
+  <div id="problem"></div>
+  <div id="numberline-container">
+    <div id="numberline"></div>
+    <div id="rabbit">🐇</div>
+  </div>
+  <div id="feedback"></div>
+  <div id="scoreboard">Score: <span id="score">0</span></div>
+  <div id="rewards"></div>
+</div>
+
+<script>
+const numberLine = document.getElementById("numberline");
+const rabbit = document.getElementById("rabbit");
+const positions = {};
+let score = 0;
+let currentNum = 0;
+let correctAnswer = 0;
+let flipInterval = null;
+const minNum=-10, maxNum=10;
+
+function sleep(ms){return new Promise(resolve=>setTimeout(resolve,ms));}
+
+// Build number line
+function buildNumberLine(){
+  numberLine.innerHTML="";
+  for(let i=minNum;i<=maxNum;i++){
+    const tick = document.createElement('div');
+    tick.className='tick';
+    tick.innerText=i;
+    tick.dataset.value=i;
+
+    const hole = document.createElement('div');
+    hole.className='hole';
+    tick.appendChild(hole);
+
+    numberLine.appendChild(tick);
+    positions[i]=tick;
+
+    tick.addEventListener('click', ()=>checkAnswer(i));
+  }
+}
+
+// Rabbit flip left-right
+function startFlipping(){
+  flipInterval = setInterval(() => {
+    const currentScale = rabbit.style.transform.includes("scaleX(-1)") ? -1 : 1;
+    rabbit.style.transform = currentScale === 1 ? "scaleX(-1)" : "scaleX(1)";
+  }, 500);
+}
+
+function stopFlipping(){
+  clearInterval(flipInterval);
+  flipInterval = null;
+  const tick = positions[currentNum];
+  rabbit.style.left = tick.offsetLeft + tick.offsetWidth/2 - rabbit.offsetWidth/2 + "px";
+}
+
+// Rabbit disappears down hole
+async function rabbitDisappear() {
+  stopFlipping();
+  const tick = positions[currentNum];
+  const hole = tick.querySelector('.hole');
+  hole.style.opacity=1;
+  rabbit.style.transition="transform 0.3s ease, top 0.3s ease";
+  rabbit.style.transform += " translateY(15px)";
+  await sleep(300);
+  rabbit.style.opacity=0;
+  await sleep(200);
+  hole.style.opacity=0;
+  rabbit.style.transform=rabbit.style.transform.replace(" translateY(15px)","");
+  rabbit.style.opacity=1;
+}
+
+// Rabbit pops out of hole at start number
+async function rabbitAppear(startNum){
+  const tick = positions[startNum];
+  currentNum=startNum;
+  const faceRight = Math.random()>0.5;
+  rabbit.style.transform = faceRight?"scaleX(-1)":"scaleX(1)";
+  rabbit.style.left = tick.offsetLeft + tick.offsetWidth/2 - rabbit.offsetWidth/2 + "px";
+  rabbit.style.top = "20px";
+  rabbit.style.transition = "top 0.5s ease";
+  await sleep(50);
+  rabbit.style.top = "-35px";
+  await sleep(500);
+  startFlipping();
+}
+
+// Simple hop
+async function rabbitJumpToAnswer(answer){
+  stopFlipping();
+  const step = (answer>currentNum)?1:-1;
+  rabbit.style.transform = (answer>currentNum)?"scaleX(-1)":"scaleX(1)";
+
+  for(let i=currentNum+step;i!==answer+step;i+=step){
+    // Reset all numbers to white
+    for(let key in positions) positions[key].style.color="white";
+    positions[i].style.color="yellow";
+
+    const tick=positions[i];
+    const left=tick.offsetLeft + tick.offsetWidth/2 - rabbit.offsetWidth/2;
+    const top=-35;
+    rabbit.style.transition="left 0.3s ease, top 0.15s ease";
+    rabbit.style.left = left + "px";
+    rabbit.style.top = (top-15) + "px";
+    await sleep(150);
+    rabbit.style.top = top + "px";
+    await sleep(150);
+  }
+  positions[answer].style.color="orange"; // final answer
+  currentNum=answer;
+}
+
+// Generate new problem
+async function generateProblem(){
+  await rabbitDisappear();
+  let num1=Math.floor(Math.random()*(maxNum-minNum+1))+minNum;
+  let num2, operator;
+  do{
+    num2=Math.floor(Math.random()*11)-5;
+    operator=Math.random()>0.5?'+':'-';
+    correctAnswer = operator==='+'? num1+num2 : num1-num2;
+  }while(correctAnswer<minNum || correctAnswer>maxNum);
+
+  // Reset all numbers to white
+  for(let key in positions) positions[key].style.color="white";
+
+  document.getElementById('problem').innerText=`${num1} ${operator} ${num2} = ?`;
+  document.getElementById('feedback').innerText="";
+  await rabbitAppear(num1);
+}
+
+// Check answer (only jump if correct)
+async function checkAnswer(choice){
+  const feedback=document.getElementById("feedback");
+  const rewards=document.getElementById("rewards");
+
+  if(choice===correctAnswer){
+    feedback.innerText="✅ Correct!";
+    feedback.style.color="#00e676";
+
+    // Increment score and rewards
+    score++;
+    document.getElementById('score').innerText=score;
+    const star=document.createElement("span");
+    star.innerText="⭐";
+    rewards.appendChild(star);
+    if(rewards.childNodes.length>5) rewards.removeChild(rewards.firstChild);
+
+    // Rabbit hops only after correct click
+    await rabbitJumpToAnswer(correctAnswer);
+    await sleep(500);
+    generateProblem();  // new problem after hop
+  } else {
+    feedback.innerText="❌ Not quite!";
+    feedback.style.color="#ff5252";
+  }
+}
+
+// Initialize
+buildNumberLine();
+generateProblem();
+</script>
+</body>
+</html>
