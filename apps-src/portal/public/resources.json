@@ -14,7 +14,12 @@
       "Adding",
       "Subtracting",
       "Numbers"
-    ]
+    ],
+    "ageBands": [
+      "5-8",
+      "9-12"
+    ],
+    "featured": true
   },
   {
     "id": "2",
@@ -32,7 +37,12 @@
       "Vocabulary",
       "Fun",
       "Hangman"
-    ]
+    ],
+    "ageBands": [
+      "k4",
+      "5-8"
+    ],
+    "featured": true
   },
   {
     "id": "3",
@@ -45,10 +55,15 @@
     "path": "/multiplication/",
     "rating": 4.9,
     "tags": [
-      "Stories",
-      "Dragon",
-      "Reading"
-    ]
+      "Math",
+      "Multiplication",
+      "Numbers"
+    ],
+    "ageBands": [
+      "k4",
+      "5-8"
+    ],
+    "featured": true
   },
   {
     "id": "4",
@@ -64,7 +79,12 @@
       "Writing",
       "Headline",
       "Fun"
-    ]
+    ],
+    "ageBands": [
+      "5-8",
+      "9-12"
+    ],
+    "featured": true
   },
   {
     "id": "5",
@@ -80,6 +100,11 @@
       "Art",
       "Writing",
       "Creativity"
+    ],
+    "ageBands": [
+      "k4",
+      "5-8",
+      "9-12"
     ]
   },
   {
@@ -96,6 +121,10 @@
       "Writing",
       "Hockey",
       "Creativity"
+    ],
+    "ageBands": [
+      "k4",
+      "5-8"
     ]
   },
   {
@@ -112,6 +141,31 @@
       "Lifeskills",
       "Game",
       "Symbols"
+    ],
+    "ageBands": [
+      "5-8",
+      "9-12"
     ]
+  },
+  {
+    "id": "8",
+    "title": "Pre-Calculus Lab",
+    "description": "Explore parent functions, transformations, inverses, compositions, and operations with interactive graphs and a digital whiteboard.",
+    "subject": "Math",
+    "date": "2026-08-09",
+    "type": "Website",
+    "thumbnail": "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&q=80&w=600",
+    "path": "/math/",
+    "rating": 5,
+    "tags": [
+      "Math",
+      "Pre-Calculus",
+      "Functions",
+      "Graphs"
+    ],
+    "ageBands": [
+      "9-12"
+    ],
+    "featured": true
   }
 ]

@@ -1,54 +1,28 @@
-﻿import { Resource, ResourceInput } from "./types";
+import { Resource, ResourceInput } from "./types";
 import resourcesData from "./public/resources.json";
 
-function normalizePath(path: string): string {
+function normalizePath(path: string) {
   const value = path.trim();
   if (!value) return "#";
-
-  if (value.startsWith("http://") || value.startsWith("https://")) return value;
-  if (value.startsWith("mailto:") || value.startsWith("tel:")) return value;
-  if (value.startsWith("#")) return value;
-
+  if (/^(https?:|mailto:|tel:|#)/.test(value)) return value;
   return value.startsWith("/") ? value : `/${value}`;
 }
-
-function slugify(text: string): string {
-  return text
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-}
-
+function slugify(text: string) { return text.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, ""); }
 function toResource(input: ResourceInput, index: number): Resource {
-  const id = input.id?.trim() || `${slugify(input.title)}-${index + 1}`;
-  const downloadUrl = input.downloadUrl?.trim() || normalizePath(input.path ?? "#");
-
   return {
-    id,
-    title: input.title,
-    description: input.description,
-    subject: input.subject,
-    date: input.date ?? "",
-    type: input.type ?? "Website",
-    thumbnail: input.thumbnail,
-    downloadUrl,
-    rating: input.rating ?? 0,
-    tags: input.tags ?? []
+    id: input.id?.trim() || `${slugify(input.title)}-${index + 1}`,
+    title: input.title, description: input.description, subject: input.subject, date: input.date ?? "",
+    type: input.type ?? "Website", thumbnail: input.thumbnail,
+    downloadUrl: input.downloadUrl?.trim() || normalizePath(input.path ?? "#"),
+    rating: input.rating ?? 0, tags: input.tags ?? [],
+    ageBands: input.ageBands ?? ["k4", "5-8", "9-12"],
+    studentIds: input.studentIds ?? [], groupIds: input.groupIds ?? [],
+    featured: input.featured ?? index < 4, status: input.status ?? "published"
   };
 }
-
-function getTimestamp(value: string): number {
-  const parsed = Date.parse(value);
-  return Number.isNaN(parsed) ? 0 : parsed;
-}
-
-export const RESOURCES: Resource[] = (resourcesData as ResourceInput[])
-  .map(toResource)
-  .sort((left, right) => getTimestamp(right.date) - getTimestamp(left.date));
-
-const uniqueSubjects = Array.from(new Set(RESOURCES.map((item) => item.subject).filter(Boolean)));
-export const SUBJECTS: string[] = ["All", ...uniqueSubjects];
-
-export const MOCK_RESOURCES: Resource[] = RESOURCES;
-
+const time = (value: string) => Number.isNaN(Date.parse(value)) ? 0 : Date.parse(value);
+export const RESOURCES = (resourcesData as ResourceInput[]).map(toResource)
+  .filter((item) => item.status === "published")
+  .sort((a, b) => time(b.date) - time(a.date));
+export const SUBJECTS = ["All", ...Array.from(new Set(RESOURCES.map((item) => item.subject).filter(Boolean)))];
+export const MOCK_RESOURCES = RESOURCES;

@@ -3,10 +3,12 @@ import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Resources from "./pages/Resources";
+import Admin from "./pages/Admin";
+import { AudienceProvider } from "./context/AudienceContext";
 
 const App: React.FC = () => {
   return (
-    <Router>
+    <AudienceProvider><Router>
       <div className="flex flex-col min-h-screen">
         <Navbar />
 
@@ -14,10 +16,11 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/resources" element={<Resources />} />
+            <Route path="/admin" element={<Admin />} />
           </Routes>
         </main>
       </div>
-    </Router>
+    </Router></AudienceProvider>
   );
 };
 

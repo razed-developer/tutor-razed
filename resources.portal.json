@@ -9,7 +9,9 @@
     "thumbnail": "https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "path": "/integers/rabbit-integers.html",
     "rating": 5.0,
-    "tags": ["Integers", "Adding", "Subtracting", "Numbers"]
+    "tags": ["Integers", "Adding", "Subtracting", "Numbers"],
+    "ageBands": ["5-8", "9-12"],
+    "featured": true
   },
   {
     "id": "2",
@@ -21,7 +23,9 @@
     "thumbnail": "https://images.unsplash.com/photo-1637019837948-58c4c4eb8082?q=80&w=752&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "path": "/lettercountdown/lettercountdown.html",
     "rating": 4.8,
-    "tags": ["Writing", "Spelling", "Vocabulary", "Fun", "Hangman"]
+    "tags": ["Writing", "Spelling", "Vocabulary", "Fun", "Hangman"],
+    "ageBands": ["k4", "5-8"],
+    "featured": true
   },
   {
     "id": "3",
@@ -33,7 +37,9 @@
     "thumbnail": "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=600",
     "path": "/multiplication/",
     "rating": 4.9,
-    "tags": ["Stories", "Dragon", "Reading"]
+    "tags": ["Math", "Multiplication", "Numbers"],
+    "ageBands": ["k4", "5-8"],
+    "featured": true
   },
   {
     "id": "4",
@@ -45,7 +51,9 @@
     "thumbnail": "https://images.unsplash.com/photo-1523995462485-3d171b5c8fa9?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "path": "/headline-to-story/",
     "rating": 4.7,
-    "tags": ["Writing", "Headline", "Fun"]
+    "tags": ["Writing", "Headline", "Fun"],
+    "ageBands": ["5-8", "9-12"],
+    "featured": true
   },
   {
     "id": "5",
@@ -57,7 +65,8 @@
     "thumbnail": "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8YXJ0fGVufDB8fDB8fHww",
     "path": "/story-symphony/",
     "rating": 4.9,
-    "tags": ["Art", "Writing", "Creativity"]
+    "tags": ["Art", "Writing", "Creativity"],
+    "ageBands": ["k4", "5-8", "9-12"]
   },
   {
     "id": "6",
@@ -69,7 +78,8 @@
     "thumbnail": "https://images.unsplash.com/photo-1515703407324-5f753afd8be8?auto=format&fit=crop&q=80&w=600",
     "path": "/rumblerink/",
     "rating": 4.6,
-    "tags": ["Writing","Hockey","Creativity"]
+    "tags": ["Writing","Hockey","Creativity"],
+    "ageBands": ["k4", "5-8"]
   },
   {
     "id": "7",
@@ -81,7 +91,8 @@
     "thumbnail": "https://images.unsplash.com/photo-1665567032056-4d22d92638da?auto=format&fit=crop&q=80&w=600",
     "path": "/graduate-together/",
     "rating": 4.6,
-    "tags": ["Lifeskills","Game","Symbols"]
+    "tags": ["Lifeskills","Game","Symbols"],
+    "ageBands": ["5-8", "9-12"]
   },
   {
     "id": "8",
@@ -93,6 +104,8 @@
     "thumbnail": "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&q=80&w=600",
     "path": "/math/",
     "rating": 5.0,
-    "tags": ["Math", "Pre-Calculus", "Functions", "Graphs"]
+    "tags": ["Math", "Pre-Calculus", "Functions", "Graphs"],
+    "ageBands": ["9-12"],
+    "featured": true
   }
 ]
