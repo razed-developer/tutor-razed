@@ -1,13 +1,13 @@
 # Tutor Site
 
-This repository builds and deploys a multi-app GitHub Pages site from one source repo.
+This repository builds and deploys a multi-app site to Cloudflare Pages from one source repo.
 
 It supports two kinds of subsites:
 
 - React/Vite apps in `apps-src/`
 - static HTML/CSS/JS sites in `static-src/`
 
-The final published output is assembled into `site/` and deployed by GitHub Actions.
+The final published output is assembled into `site/` and deployed by Cloudflare Pages.
 
 ## How It Works
 
@@ -16,7 +16,7 @@ At the root level:
 - `apps.manifest.json` defines which React/Vite apps are part of the site
 - `static-src/` contains static sites that are copied as-is
 - `scripts/assemble.mjs` builds apps and assembles the final `site/`
-- `.github/workflows/deploy-pages.yml` deploys `site/` to GitHub Pages
+- `wrangler.toml` tells Cloudflare Pages to publish `site/`
 
 Build flow:
 
@@ -24,7 +24,7 @@ Build flow:
 2. Build each app listed in `apps.manifest.json`
 3. Copy each app's `dist/` output into `site/`
 4. Copy each `static-src/<name>/` folder into `site/<name>/`
-5. Upload `site/` to GitHub Pages
+5. Publish `site/` through Cloudflare Pages
 
 ## Project Structure
 
@@ -180,25 +180,26 @@ If you want the portal to link to it, also update `resources.portal.json`.
 
 ## Deployment
 
-This repo is set up for GitHub Pages via GitHub Actions.
+This repo is configured for Cloudflare Pages.
 
-Workflow file:
+Cloudflare Pages settings:
 
-```text
-.github/workflows/deploy-pages.yml
-```
+- Production branch: `main`
+- Build command: `npm run ci:apps && npm run build`
+- Build output directory: `site`
+- Node.js version: `20`
 
-On push to `main`, the workflow:
+The committed `wrangler.toml` also declares `site` as the Pages build output directory.
 
-1. checks out the repo
-2. installs dependencies with `npm run ci:apps`
-3. builds with `npm run build`
-4. uploads `site/`
-5. deploys to GitHub Pages
+To connect the repository:
 
-Repository setting required:
+1. In Cloudflare, open **Workers & Pages**.
+2. Create a Pages project and connect `razed-developer/tutor-razed`.
+3. Select the `main` production branch.
+4. Enter the build command and output directory shown above.
+5. Save and deploy.
 
-- `Settings > Pages > Source = GitHub Actions`
+After the first successful Cloudflare deployment, disable GitHub Pages in the repository settings if it is still enabled.
 
 ## Notes For Reuse
 
