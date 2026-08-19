@@ -4,6 +4,9 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Resources from "./pages/Resources";
 import Admin from "./pages/Admin";
+import Stories from "./pages/Stories";
+import StoryReader from "./pages/StoryReader";
+import StoryAdmin from "./pages/StoryAdmin";
 import { AudienceProvider } from "./context/AudienceContext";
 
 const App: React.FC = () => {
@@ -17,6 +20,9 @@ const App: React.FC = () => {
             <Route path="/" element={<Home />} />
             <Route path="/resources" element={<Resources />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/admin/stories" element={<StoryAdmin />} />
+            <Route path="/stories" element={<Stories />} />
+            <Route path="/stories/:id" element={<StoryReader />} />
           </Routes>
         </main>
       </div>
