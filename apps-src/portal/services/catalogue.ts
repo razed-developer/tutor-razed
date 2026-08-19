@@ -1,5 +1,5 @@
 import { RESOURCES } from "../constants";
-import type { Resource, Student, StudentGroup } from "../types";
+import type { Resource, Story, Student, StudentGroup } from "../types";
 
 const readError = async (response: Response) => {
   try { return (await response.json()).error || response.statusText; }
@@ -31,4 +31,14 @@ export const adminApi = {
   archiveResource: (id: string) => request<{ id: string }>(`/api/admin/resources/${encodeURIComponent(id)}`, { method: "DELETE" }),
   saveStudent: (student: Partial<Student>) => request<{ id: string }>("/api/admin/students", { method: "POST", body: JSON.stringify(student) }),
   saveGroup: (group: Partial<StudentGroup>) => request<{ id: string }>("/api/admin/groups", { method: "POST", body: JSON.stringify(group) }),
+  stories: () => request<{ stories: Story[] }>("/api/admin/stories"),
+  story: (id: string) => request<{ story: Story }>(`/api/admin/stories/${encodeURIComponent(id)}`),
+  createStory: (story: Partial<Story>) => request<{ id: string }>("/api/admin/stories", { method: "POST", body: JSON.stringify(story) }),
+  updateStory: (id: string, story: Partial<Story>) => request<{ id: string }>(`/api/admin/stories/${encodeURIComponent(id)}`, { method: "PUT", body: JSON.stringify(story) }),
+  archiveStory: (id: string) => request<{ id: string }>(`/api/admin/stories/${encodeURIComponent(id)}`, { method: "DELETE" }),
+};
+
+export const storyApi = {
+  list: () => request<{ stories: Story[] }>("/api/stories"),
+  get: (id: string) => request<{ story: Story }>(`/api/stories/${encodeURIComponent(id)}`),
 };

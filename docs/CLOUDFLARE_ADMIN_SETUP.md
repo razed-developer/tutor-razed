@@ -45,7 +45,7 @@ npx wrangler login
 npm run db:migrate:remote
 ```
 
-This applies both migrations: the schema and the existing resource catalogue.
+This applies all migrations: the resource catalogue plus the Reading Library story and passage tables.
 
 ## 5. Protect both admin paths with Access
 
@@ -68,6 +68,9 @@ After redeploying, sign in through Access and check:
 2. The same URL returns `403` without an Access session.
 3. `/api/resources` returns the seeded resource catalogue.
 4. Creating a draft in `/admin` does not show it publicly; publishing it does.
+5. `/admin/stories` can accept story text, save it as a draft, and publish it to `/stories`.
+
+The Reading Library requires a source URL and a written public-domain verification record for every story. Uploaded text is stored in D1 and automatically divided into ordered passages; changing the target word count rechunks the story on save.
 
 The anonymous public API deliberately excludes resources assigned to specific students or groups. Those assignments will become visible only through a later authenticated student endpoint.
 

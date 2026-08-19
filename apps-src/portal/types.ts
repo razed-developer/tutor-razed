@@ -14,6 +14,14 @@ export interface Resource {
 export interface Student { id: string; displayName: string; active: boolean; }
 export interface StudentGroup { id: string; name: string; active: boolean; studentIds: string[]; }
 
+export interface StoryPassage { number: number; text: string; wordCount: number; }
+export interface Story {
+  id: string; title: string; author: string; description: string; coverImage: string;
+  readingLevel: string; sourceUrl: string; publicDomainNote: string; status: ResourceStatus;
+  ageBands: AgeBand[]; chunkSize: number; passageCount?: number; wordCount?: number;
+  publishedAt?: string; fullText?: string; passages?: StoryPassage[];
+}
+
 export interface ResourceInput {
   id?: string; title: string; description: string; subject: string; date?: string;
   type?: ResourceType; thumbnail: string; downloadUrl?: string; path?: string;

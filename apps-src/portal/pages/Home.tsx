@@ -29,7 +29,7 @@ const Home: React.FC = () => {
       <section className="section-block"><div className="section-heading"><div><p className="eyebrow">Hand-picked</p><h2>Featured for you</h2></div><a href="/resources">See the whole collection →</a></div><div className="featured-grid">{featured.map((r) => <ResourceCard key={r.id} resource={r}/>)}</div></section>
       <section className="section-block"><div className="section-heading"><div><p className="eyebrow">Choose a route</p><h2>Explore by subject</h2></div></div><div className="subject-grid">
         <a href="/resources?subject=Math"><b>△</b><span><strong>Math</strong><small>Patterns, puzzles & graphs</small></span></a>
-        <a href="/resources?subject=Writing"><b>✎</b><span><strong>Language Arts</strong><small>Stories, words & ideas</small></span></a>
+        <a href="/stories"><b>✎</b><span><strong>Reading Library</strong><small>Stories, words & listening</small></span></a>
         <a href="/resources?subject=Science"><b>⌁</b><span><strong>Science</strong><small>Observe, test & discover</small></span></a>
         <a href="/resources"><b>✦</b><span><strong>Games & Tools</strong><small>Learn by doing</small></span></a>
       </div></section>

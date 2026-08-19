@@ -1,0 +1,20 @@
+import React, { useEffect, useMemo, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { storyApi } from "../services/catalogue";
+import type { Story } from "../types";
+
+const tokenize = (text: string) => text.split(/(\s+|[—–-])/).filter(Boolean);
+const speak = (text: string, rate: number, onEnd?: () => void) => { window.speechSynthesis.cancel(); const utterance = new SpeechSynthesisUtterance(text); utterance.rate = rate; utterance.onend = () => onEnd?.(); utterance.onerror = () => onEnd?.(); window.speechSynthesis.speak(utterance); };
+
+const StoryReader: React.FC = () => {
+  const { id = "" } = useParams(); const [story, setStory] = useState<Story | null>(null); const [page, setPage] = useState(0); const [rate, setRate] = useState(0.9); const [speaking, setSpeaking] = useState(false); const [fontScale, setFontScale] = useState(1); const [error, setError] = useState("");
+  useEffect(() => { storyApi.get(id).then((data) => setStory(data.story)).catch((reason) => setError(reason instanceof Error ? reason.message : "Could not open story")); return () => window.speechSynthesis.cancel(); }, [id]);
+  useEffect(() => { const saved = Number(localStorage.getItem(`reading-progress:${id}`)); if (Number.isFinite(saved)) setPage(saved); }, [id]);
+  const passage = story?.passages?.[page]; const tokens = useMemo(() => tokenize(passage?.text ?? ""), [passage?.text]);
+  const go = (next: number) => { window.speechSynthesis.cancel(); setSpeaking(false); setPage(next); localStorage.setItem(`reading-progress:${id}`, String(next)); window.scrollTo({ top: 0, behavior: "smooth" }); };
+  const readPassage = () => { if (!passage) return; if (speaking) { window.speechSynthesis.cancel(); setSpeaking(false); } else { setSpeaking(true); speak(passage.text, rate, () => setSpeaking(false)); } };
+  if (error) return <div className="story-empty"><h1>We could not open this story.</h1><p>{error}</p><Link to="/stories">Return to the library</Link></div>;
+  if (!story || !passage) return <div className="story-empty">Opening your story…</div>;
+  return <div className="reader-page"><header className="reader-header"><Link to="/stories">← Library</Link><div><strong>{story.title}</strong><span>by {story.author}</span></div><span>Passage {page + 1} of {story.passages?.length}</span></header><main className="reader-shell"><section className="reader-tools" aria-label="Reading controls"><button className={speaking ? "active" : ""} onClick={readPassage}>{speaking ? "■ Stop reading" : "▶ Read to me"}</button><label>Speed<select value={rate} onChange={(event) => setRate(Number(event.target.value))}><option value={0.7}>Slow</option><option value={0.9}>Comfortable</option><option value={1.1}>Quick</option></select></label><div className="text-size"><span>Text size</span><button onClick={() => setFontScale(Math.max(.85, fontScale - .1))}>A−</button><button onClick={() => setFontScale(Math.min(1.5, fontScale + .1))}>A+</button></div></section><article className="reading-paper" style={{ "--reader-scale": fontScale } as React.CSSProperties}><p className="tap-hint">Tap or click a word to hear it.</p><div className="passage-text">{tokens.map((token, index) => /^\s+$/.test(token) ? token : <button key={`${token}-${index}`} onClick={() => speak(token.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, ""), rate)}>{token}</button>)}</div></article><nav className="passage-nav"><button disabled={page === 0} onClick={() => go(page - 1)}>← Previous passage</button><div><span>{Math.round(((page + 1) / (story.passages?.length ?? 1)) * 100)}% complete</span><progress value={page + 1} max={story.passages?.length}/></div><button disabled={page >= (story.passages?.length ?? 1) - 1} onClick={() => go(page + 1)}>Next passage →</button></nav><details className="story-source"><summary>Story source and public-domain record</summary><p><strong>Source:</strong> <a href={story.sourceUrl} target="_blank" rel="noreferrer">{story.sourceUrl}</a></p><p><strong>Record:</strong> {story.publicDomainNote}</p></details></main></div>;
+};
+export default StoryReader;
